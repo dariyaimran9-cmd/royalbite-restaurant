@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RoyalBite | Our Menu</title>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Poppins:wght@400;500;600&display=swap"
+        rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: #11100e;
+            color: white;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        /* NAVBAR */
+        .navbar {
+            background: #0c0c0b;
+            padding: 20px 4%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            border-bottom: 1px solid #33302a;
+        }
+
+        .logo {
+            color: #e9bd60;
+            font-family: 'Playfair Display', serif;
+            font-size: 29px;
+            font-weight: bold;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 23px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .nav-links a {
+            color: white;
+            font-size: 14px;
+            transition: .3s;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: #e9bd60;
+        }
+
+        .book-btn {
+            background: #e9bd60;
+            color: #17130d !important;
+            padding: 12px 20px;
+            border-radius: 25px;
+            font-weight: 600;
+        }
+
+        /* MENU HEADER */
+        .menu-header {
+            text-align: center;
+            padding: 65px 20px 35px;
+        }
+
+        .subtitle {
+            color: #e9bd60;
+            letter-spacing: 5px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .menu-header h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(38px, 5vw, 58px);
+            margin: 15px 0;
+        }
+
+        .menu-header p {
+            color: #c6c0b7;
+            font-size: 14px;
+            line-height: 1.8;
+        }
+
+        /* FOOD GRID */
+        .menu-container {
+            max-width: 1280px;
+            margin: auto;
+            padding: 10px 30px 70px;
+        }
+
+        .food-grid {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 24px;
+        }
+
+        .food-card {
+            background: #1b1a18;
+            border: 1px solid #393630;
+            border-radius: 15px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: transform .3s, border-color .3s, box-shadow .3s;
+        }
+
+        .food-card:hover {
+            transform: translateY(-7px);
+            border-color: #e9bd60;
+            box-shadow: 0 12px 30px rgba(233, 189, 96, .12);
+        }
+
+        .food-card img {
+            width: 100%;
+            height: 180px;
+            display: block;
+            object-fit: cover;
+            transition: transform .4s;
+        }
+
+        .food-card:hover img {
+            transform: scale(1.04);
+        }
+
+        .food-info {
+            padding: 18px;
+        }
+
+        .food-info h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 21px;
+            margin-bottom: 9px;
+        }
+
+        .food-info p {
+            color: #c6c0b7;
+            font-size: 13px;
+            line-height: 1.8;
+            min-height: 47px;
+        }
+
+        .food-price {
+            color: #ffbd4a;
+            font-size: 17px;
+            font-weight: 700;
+            margin-top: 13px;
+        }
+
+        .click-hint {
+            color: #e9bd60;
+            font-size: 11px;
+            margin-top: 12px;
+            letter-spacing: 1px;
+        }
+
+        /* MODAL BACKGROUND */
+        .modal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            z-index: 1000;
+            background: rgba(0, 0, 0, .82);
+            backdrop-filter: blur(7px);
+            padding: 20px;
+            align-items: center;
+            justify-content: center;
+            overflow-y: auto;
+        }
+
+        .modal.show {
+            display: flex;
+            animation: fadeIn .25s ease;
+        }
+
+        /* MODAL BOX */
+        .modal-box {
+            position: relative;
+            width: 100%;
+            max-width: 850px;
+            background: #1b1a18;
+            border: 1px solid #6e592e;
+            border-radius: 18px;
+            overflow: hidden;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            box-shadow: 0 25px 80px rgba(0, 0, 0, .6);
+            animation: popIn .3s ease;
+        }
+
+        .modal-image {
+            width: 100%;
+            height: 100%;
+            min-height: 400px;
+            object-fit: cover;
+            display: block;
+            background: #292722;
+        }
+
+        .modal-content {
+            padding: 45px 30px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .modal-label {
+            color: #e9bd60;
+            letter-spacing: 4px;
+            font-size: 11px;
+            font-weight: 600;
+        }
+
+        .modal-content h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 35px;
+            line-height: 1.2;
+            margin: 18px 0;
+        }
+
+        .modal-content p {
+            color: #d1c9bd;
+            font-size: 14px;
+            line-height: 1.9;
+        }
+
+        .modal-price {
+            color: #ffbd4a;
+            font-size: 26px;
+            font-weight: 700;
+            margin: 24px 0;
+        }
+
+        .modal-book {
+            display: inline-block;
+            text-align: center;
+            background: #e9bd60;
+            color: #17130d;
+            padding: 14px 18px;
+            border-radius: 6px;
+            font-weight: 600;
+            font-size: 13px;
+        }
+
+        .modal-book:hover {
+            background: #ffd77b;
+        }
+
+        /* CLOSE BUTTON */
+        .close-btn {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            z-index: 2;
+            border: 1px solid #655a43;
+            background: #11100e;
+            color: white;
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            font-size: 25px;
+            cursor: pointer;
+            transition: .3s;
+        }
+
+        .close-btn:hover {
+            background: #e9bd60;
+            color: #111;
+            transform: rotate(90deg);
+        }
+
+        footer {
+            text-align: center;
+            padding: 28px 15px;
+            background: #0c0c0b;
+            border-top: 1px solid #33302a;
+            color: #aaa398;
+            font-size: 12px;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes popIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px) scale(.97);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 1000px) {
+            .food-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+
+            .navbar {
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .nav-links {
+                justify-content: center;
+                gap: 14px;
+            }
+
+            .menu-container {
+                padding: 10px 15px 45px;
+            }
+
+            .food-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .food-card img {
+                height: 220px;
+            }
+
+            .modal {
+                padding: 12px;
+            }
+
+            .modal-box {
+                grid-template-columns: 1fr;
+                max-width: 430px;
+                margin: auto;
+            }
+
+            .modal-image {
+                height: 230px;
+                min-height: 0;
+            }
+
+            .modal-content {
+                padding: 25px;
+            }
+
+            .modal-content h2 {
+                font-size: 28px;
+                margin: 12px 0;
+            }
+
+            .modal-price {
+                margin: 15px 0;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- NAVBAR -->
+    <nav class="navbar">
+        <a href="index.html" class="logo">♛ RoyalBite</a>
+
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="about.html">About</a>
+            <a href="menu.html" class="active">Menu</a>
+            <a href="gallery.html">Gallery</a>
+            <a href="contact.html">Contact</a>
+            <a href="booking.html" class="book-btn">Add cart</a>
+        </div>
+    </nav>
+
+    <!-- MENU HEADING -->
+    <header class="menu-header">
+        <span class="subtitle">TASTE THE DIFFERENCE</span>
+        <h1>Our Special Menu</h1>
+        <p>Discover your favourites, freshly prepared with love.</p>
+    </header>
+
+    <!-- FOOD CARDS -->
+    <main class="menu-container">
+        <div class="food-grid" id="foodGrid"></div>
+    </main>
+
+    <!-- FOOD DETAILS MODAL -->
+    <div class="modal" id="foodModal" aria-hidden="true">
+        <div class="modal-box" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+
+            <button class="close-btn" id="closeModal" aria-label="Close popup">&times;</button>
+
+            <img class="modal-image" id="modalImage" src="" alt="">
+
+            <div class="modal-content">
+                <span class="modal-label">ROYALBITE SPECIAL</span>
+
+                <h2 id="modalTitle">Dish Name</h2>
+
+                <p id="modalDescription"></p>
+
+                <div class="modal-price" id="modalPrice"></div>
+
+                <a href="booking.html" class="modal-book">
+                    Add cart &rarr;
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        © 2026 RoyalBite Restaurant. All Rights Reserved.
+    </footer>
+
+    <script>
+        const dishes = [
+            {
+                name: "Royal Pizza",
+                description: "Golden crust topped with rich mozzarella cheese, fresh herbs and a delicious blend of classic pizza flavours.",
+                price: "$14.00",
+                image: "images/pizza.png"
+
+            },
+            {
+                name: "Creamy Pasta",
+                description: "Tender pasta coated in a smooth, creamy parmesan sauce, finished with herbs and a touch of black pepper.",
+                price: "$12.00",
+                image: "images/creamy pasta.png"
+            },
+            {
+                name: "Classic Burger",
+                description: "A juicy burger served with crisp lettuce, fresh tomato, melted cheese and our signature house sauce.",
+                price: "$11.00",
+                image: "images/classic burger.png"
+            },
+            {
+                name: "Grilled Special",
+                description: "A beautifully grilled special prepared with aromatic seasoning and served with delicious seasonal sides.",
+                price: "$22.00",
+                image: "images/grilled special.png"
+            },
+            {
+                name: "Royal Cake",
+                description: "A delightful celebration cake with soft layers, smooth frosting and colourful sweet decorations.",
+                price: "$18.00",
+                image: "images/royal cake.png"
+            },
+            {
+                name: "Fresh Garden Salad",
+                description: "A refreshing mix of crisp greens, cucumber, tomatoes and seasonal vegetables with a light dressing.",
+                price: "$8.00",
+                image: "images/Green salad.png"
+            },
+            {
+                name: "Royal Bowl",
+                description: "A colourful bowl of fresh ingredients, vegetables and tasty toppings, made for a satisfying meal.",
+                price: "$13.00",
+                image: "images/royal Bowl.png"
+            },
+            {
+                name: "Chicken Biryani",
+                description: "Fragrant rice layered with seasoned chicken and aromatic spices, served as a comforting restaurant favourite.",
+                price: "$15.00",
+                image: "images/chicken biryani.png"
+            }
+        ];
+
+        const foodGrid = document.getElementById("foodGrid");
+        const modal = document.getElementById("foodModal");
+        const modalImage = document.getElementById("modalImage");
+        const modalTitle = document.getElementById("modalTitle");
+        const modalDescription = document.getElementById("modalDescription");
+        const modalPrice = document.getElementById("modalPrice");
+        const closeModal = document.getElementById("closeModal");
+
+        let lastFocusedCard = null;
+
+        /* CREATE ALL FOOD CARDS */
+        dishes.forEach((dish, index) => {
+            const card = document.createElement("article");
+            card.className = "food-card";
+            card.tabIndex = 0;
+            card.setAttribute("role", "button");
+            card.setAttribute("aria-label", "View " + dish.name + " details");
+
+            card.innerHTML = `
+        <img src="${dish.image}" alt="${dish.name}" loading="lazy">
+        <div class="food-info">
+            <h3>${dish.name}</h3>
+            <p>${dish.description}</p>
+            <div class="food-price">${dish.price}</div>
+            <div class="click-hint">CLICK TO VIEW DETAILS ↗</div>
+        </div>
+    `;
+
+            card.addEventListener("click", () => {
+                openDish(dish, card);
+            });
+
+            card.addEventListener("keydown", (event) => {
+                if (event.key === "Enter" || event.key === " ") {
+                    event.preventDefault();
+                    openDish(dish, card);
+                }
+            });
+
+            foodGrid.appendChild(card);
+        });
+
+        /* OPEN POPUP */
+        function openDish(dish, card) {
+            lastFocusedCard = card;
+
+            modalImage.src = dish.image;
+            modalImage.alt = dish.name;
+            modalTitle.textContent = dish.name;
+            modalDescription.textContent = dish.description;
+            modalPrice.textContent = dish.price;
+
+            modal.classList.add("show");
+            modal.setAttribute("aria-hidden", "false");
+            document.body.style.overflow = "hidden";
+
+            closeModal.focus();
+        }
+
+        /* CLOSE POPUP */
+        function hideModal() {
+            modal.classList.remove("show");
+            modal.setAttribute("aria-hidden", "true");
+            document.body.style.overflow = "";
+
+            if (lastFocusedCard) {
+                lastFocusedCard.focus();
+            }
+        }
+
+        closeModal.addEventListener("click", hideModal);
+
+        /* CLOSE WHEN CLICKING OUTSIDE THE BOX */
+        modal.addEventListener("click", (event) => {
+            if (event.target === modal) {
+                hideModal();
+            }
+        });
+
+        /* CLOSE WITH ESCAPE KEY */
+        document.addEventListener("keydown", (event) => {
+            if (event.key === "Escape" && modal.classList.contains("show")) {
+                hideModal();
+            }
+        });
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book a Table | RoyalBite</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <header>
+        <nav class="container nav">
+            <a class="logo" href="index.html">♕ RoyalBite</a>
+            <button class="menu-toggle" aria-label="Open menu">☰</button>
+            <div class="navlinks">
+                <a href="index.html">Home</a><a href="about.html">About</a>
+                <a href="menu.html">Menu</a><a href="gallery.html">Gallery</a>
+                <a href="contact.html">Contact</a>
+            </div>
+            <a class="btn nav-book" href="booking.html">Book a Table</a>
+        </nav>
+    </header>
+    <main>
+        <section class="page-hero">
+            <div class="container">
+                <p class="eyebrow">YOUR TABLE AWAITS</p>
+                <h1>Reserve Your Experience</h1>
+                <p>Plan your next special meal with RoyalBite.</p>
+            </div>
+        </section>
+        <section class="section">
+            <div class="container booking-wrap">
+                <div>
+                    <p class="eyebrow">MAKE IT MEMORABLE</p>
+                    <h2>A Special Table for a Special Moment.</h2>
+                    <p>Complete this form to try the restaurant reservation demo.</p>
+                    <p class="hours"><strong>Opening Hours</strong><br>Every day: 04 PM – 02 AM</p>
+                </div>
+                <form class="booking-form" id="bookingForm">
+                    <h2>Book Your Table</h2>
+                    <p>Enter your reservation details below.</p>
+                    <div class="form-grid">
+                        <label>Full Name
+                            <input name="name" placeholder="Your full name" required>
+                        </label>
+                        <label>Email Address
+                            <input name="email" type="email" placeholder="you@example.com" required>
+                        </label>
+                        <label>Phone Number
+                            <input name="phone" type="tel" placeholder="Phone number" required>
+                        </label>
+                        <label>Date
+                            <input name="date" id="bookingDate" type="date" required>
+                        </label>
+                        <label>Time
+                            <select name="time" required>
+                                <option value="">Select time</option>
+                                <option>12:00 PM</option>
+                                <option>1:00 PM</option>
+                                <option>2:00 PM</option>
+                                <option>5:00 PM</option>
+                                <option>6:00 PM</option>
+                                <option>7:00 PM</option>
+                                <option>8:00 PM</option>
+                                <option>9:00 PM</option>
+                            </select>
+                        </label>
+                        <label>Guests
+                            <select name="guests" required>
+                                <option value="">Number of guests</option>
+                                <option>1 guest</option>
+                                <option>2 guests</option>
+                                <option>3 guests</option>
+                                <option>4 guests</option>
+                                <option>5 guests</option>
+                                <option>6 guests</option>
+                                <option>7+ guests</option>
+                            </select>
+                        </label>
+                        <label class="full">Special Requests (Optional)
+                            <textarea name="notes" rows="3" placeholder="Any special requests?"></textarea>
+                        </label>
+                        <button class="btn full" type="submit">Request Reservation ↗</button>
+                    </div>
+                </form>
+            </div>
+        </section>
+    </main>
+    <footer>
+        <div class="container footer">
+            <div><a class="logo" href="index.html">♕ RoyalBite</a>
+                <p>Good food, good mood.</p>
+            </div>
+            <div>
+                <h3>Explore</h3><a href="about.html">About</a><a href="menu.html">Menu</a>
+            </div>
+            <div>
+                <h3>Visit</h3><a href="gallery.html">Gallery</a><a href="contact.html">Contact</a>
+            </div>
+        </div>
+        <div class="copyright">© <span class="year"></span> RoyalBite Restaurant</div>
+    </footer>
+    <div class="toast" role="status" aria-live="polite"></div>
+    <script src="script.js"></script>
+</body>
+
+</html>
